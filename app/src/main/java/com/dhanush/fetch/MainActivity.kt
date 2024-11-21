@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         retrofitData.enqueue(object : Callback<List<Item>?> {
             override fun onResponse(call: Call<List<Item>?>, response: Response<List<Item>?>) {
                 val responseBody=response.body()!!      //body has a list of items
-                val dataset=responseBody.toList()
-                filterDataset(dataset)
+                var dataset=responseBody.toList()
+                dataset=filterDataset(dataset)
             }
 
             override fun onFailure(call: Call<List<Item>?>, t: Throwable) {
@@ -39,11 +39,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-    private fun filterDataset(dataset:List<Item>) {
-        val newItems = dataset
-            .filter { !it.name.isNullOrBlank() } // filter out blank or null names
-            .sortedWith(compareBy({ it.listId }, { it.name })) // sort by listId, name
-            .groupBy { it.listId } //group by listId
-
+    private fun filterDataset(dataset:List<Item>):List<Item> {
+        return dataset
+        .filter { !it.name.isNullOrBlank() } // filter out blank or null names
+        .sortedWith(compareBy({ it.listId }, { it.name })) // sort by listId, name
     }
 }
