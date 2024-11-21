@@ -3,6 +3,7 @@ package com.dhanush.fetch
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.dhanush.fetch.databinding.ActivityMainBinding
 import com.dhanush.fetch.model.Item
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,11 +12,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     private val dataURL="https://fetch-hiring.s3.amazonaws.com/"                 //api link
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         getItems()
 
     }
@@ -44,4 +49,5 @@ class MainActivity : AppCompatActivity() {
         .filter { !it.name.isNullOrBlank() } // filter out blank or null names
         .sortedWith(compareBy({ it.listId }, { it.name })) // sort by listId, name
     }
+
 }
