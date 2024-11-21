@@ -2,7 +2,7 @@
 [Problem document](https://fetch-hiring.s3.amazonaws.com/mobile.html)
 
 Use the following apk link to download the app apk or open this repository using android studio and build the apk. <br>
-[APK link](https://1drv.ms/u/s!AmvH0VCG4AMoiugpZLirSBopUo8T7Q?e=IK1Jj3)
+[APK link](https://1drv.ms/f/s!AmvH0VCG4AMoiugoZ3UZbYfebF81Xw?e=D9LvMa)
 
 Flow:
 1. An http get request is made to get the items.
