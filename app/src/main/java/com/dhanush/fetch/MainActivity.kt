@@ -3,6 +3,8 @@ package com.dhanush.fetch
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.dhanush.fetch.adapter.ListingAdapter
 import com.dhanush.fetch.databinding.ActivityMainBinding
 import com.dhanush.fetch.model.Item
 import retrofit2.Call
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                 val responseBody=response.body()!!      //body has a list of items
                 var dataset=responseBody.toList()
                 dataset=filterDataset(dataset)
+                fillRecycleView(dataset)
             }
 
             override fun onFailure(call: Call<List<Item>?>, t: Throwable) {
@@ -48,6 +51,14 @@ class MainActivity : AppCompatActivity() {
         return dataset
         .filter { !it.name.isNullOrBlank() } // filter out blank or null names
         .sortedWith(compareBy({ it.listId }, { it.name })) // sort by listId, name
+    }
+    private fun fillRecycleView(dataset: List<Item>) {
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.layoutManager=LinearLayoutManager(this)
+
+        binding.progressBar.hide()
+
+        binding.recyclerView.adapter=ListingAdapter(dataset)
     }
 
 }

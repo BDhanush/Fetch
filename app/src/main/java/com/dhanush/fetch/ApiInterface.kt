@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 //retrofit api service
 interface ApiInterface {
-    //a method to make an HTTP GET request to retrieve a list of products from the "get" endpoint
+    //a method to make an HTTP GET request to retrieve a list of items from the "hiring.json" endpoint
     @GET(value = "hiring.json")
     fun getItems(): Call<List<Item>>
 
