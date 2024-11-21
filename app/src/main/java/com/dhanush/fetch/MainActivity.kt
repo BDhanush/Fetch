@@ -2,6 +2,7 @@ package com.dhanush.fetch
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dhanush.fetch.adapter.ListingAdapter
@@ -13,10 +14,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+private const val dataURL="https://fetch-hiring.s3.amazonaws.com/"                 //api link
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val dataURL="https://fetch-hiring.s3.amazonaws.com/"                 //api link
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<Item>?>, t: Throwable) {
+                Toast.makeText(applicationContext,"Unable to get Items",Toast.LENGTH_LONG).show()
                 Log.e("http error", "Failed to get items: ${t.message}", t)
             }
         })
